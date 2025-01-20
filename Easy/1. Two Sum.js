@@ -104,3 +104,44 @@ function twoSumMultiSolWithoutDuplicate(nums,target){
 
 console.log(twoSumMultiSolWithoutDuplicate([-1,0,0,1,2,2,7],1));
 
+
+
+function twoSumMultiSolWithoutDuplicateV2(nums,target){
+    let result = []
+    nums.sort((a,b ) => a-b)
+    let lp =0, n=nums.length, rp=n-1
+    while(lp<n-1){
+
+        if(nums[lp]==nums[lp+1]){
+            lp++
+            continue
+        }
+
+        if(nums[rp]==nums[rp-1]){
+            rp--
+            continue
+        }
+        let sum = nums[lp]+nums[rp]
+
+
+        // console.log(nums[lp]);
+        if(sum ===target){
+            result.push([nums[lp], nums[rp]])
+            lp++
+            rp=n-1
+            continue
+        } 
+        if(sum > target){
+            rp--
+        }
+
+        if(lp==rp){
+            lp++
+            rp = n-1
+        }
+    }   
+    return result
+}
+
+console.log(twoSumMultiSolWithoutDuplicateV2([-1,0,0,1,2,2,7],1));
+

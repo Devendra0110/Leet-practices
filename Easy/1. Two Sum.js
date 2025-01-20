@@ -44,3 +44,63 @@ console.log(twoSumV0E1([2,5,5,11],10));
 
 console.log(twoSumV1E1([3,2,4],6));
 console.log(twoSumV1E1([2,7,11,15],9));
+
+
+
+// with multiple solutions 
+function twoSumMultiSol(nums,target){
+    // duplicate issue
+    let result = []
+    nums.sort((a,b ) => a-b)
+    let lp =0, n=nums.length, rp=n-1
+    while(lp<n-1){
+        if(nums[lp]+nums[rp]===target){
+            result.push([nums[lp], nums[rp]])
+        }
+        rp--
+        if(lp==rp){
+            lp++
+            rp=n-1
+        }
+    }
+    return result
+}
+
+
+// console.log(twoSumMultiSol([-1,0,0,1,2,2,7],1));
+
+
+
+function twoSumMultiSolWithoutDuplicate(nums,target){
+    let result = []
+    nums.sort((a,b ) => a-b)
+    let lp =0, n=nums.length, rp=n-1
+    while(lp<n-1){
+        if(nums[lp]==nums[lp+1]){
+            // console.log(nums[lp]);
+            lp++
+            continue
+        }
+
+        if(nums[rp]==nums[rp-1]){
+            // console.log(nums[lp]);
+            rp--
+            continue
+        }
+
+        // console.log(nums[lp]);
+        if(nums[lp]+nums[rp]===target){
+            result.push([nums[lp], nums[rp]])
+        }
+
+        rp--
+        if(lp==rp){
+            lp++
+            rp=n-1
+        }
+    }
+    return result
+}
+
+console.log(twoSumMultiSolWithoutDuplicate([-1,0,0,1,2,2,7],1));
+

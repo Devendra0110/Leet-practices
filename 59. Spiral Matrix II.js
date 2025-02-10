@@ -26,10 +26,10 @@ function spriralMatrix(size){
         i++
         j++
     }
-    // if(size%2!=0){
-    //     let position = Math.floor(size/2)
-    //     arr[position][position] = value
-    // }
+    if(size%2!=0){
+        let position = Math.floor(size/2)
+        arr[position][position] = value
+    }
     return arr
 }
 console.log(spriralMatrix(1));

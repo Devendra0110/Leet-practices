@@ -4,18 +4,15 @@
  */
 var majorityElement = function(nums) {
     const elementCounts = {}
-    let maxCount = 0, majority = nums[0]
+   let freq = 0, majority
     for(let i=0;i<nums.length;i++){
-        if(elementCounts[nums[i]]){
-            elementCounts[nums[i]] = elementCounts[nums[i]] + 1
-            if(elementCounts[nums[i]] > maxCount){
-                majority = nums[i]
-                maxCount = elementCounts[nums[i]]
-            }
-
-        }else {
-            elementCounts[nums[i]] = 1
+        let n = nums[i]
+        if(freq==0){
+            majority = n
         }
+
+        if(majority == n) freq++
+        if( majority != n) freq--
     }
     return majority
 };

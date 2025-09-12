@@ -3,19 +3,10 @@
  * @return {number}
  */
 var singleNumber = function(nums) {
-    let map = {}
+    let n = 0
     for(let i=0;i<nums.length;i++){
-        const n = nums[i]
-        if(map[n]){
-            map[n] = map[n] + 1
-        }else{
-            map[n] = 1
-        }
+        n = n ^ nums[i]
     }
-    for(let k in map){
-        if(map[k] == 1){
-            return Number(k)
-        }
-    }
+    return n
 
 };

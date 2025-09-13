@@ -3,25 +3,22 @@
  * @return {number}
  */
 var maxFreqSum = function(s) {
-    let vowels = 'aeiou', vows = {} ,cons ={}
+    let vowels = 'aeiou', chars = {}
 
     for(let i=0;i<s.length;i++){
         let c = s[i]
-        if(vowels.includes(c)){
-             vows[c] = vows[c] ? vows[c] + 1 : 1
-        }else {
-            cons[c] = cons[c] ? cons[c] + 1 : 1
-        }
+        chars[c] = chars[c] ? chars[c] + 1 : 1
     }
 
     let maxVows=0, maxCons=0
-    for(let k in vows){
-        maxVows = vows[k] > maxVows ? vows[k] : maxVows
+    for(let k in chars){
+        if(vowels.includes(k)){
+            maxVows = chars[k] > maxVows ? chars[k] : maxVows
+        }else{
+            maxCons = chars[k] > maxCons ? chars[k] : maxCons
+        }
     }
 
-    for(let k in cons){
-        maxCons = cons[k] > maxCons ? cons[k] : maxCons
-    }
 
     return maxVows + maxCons
 

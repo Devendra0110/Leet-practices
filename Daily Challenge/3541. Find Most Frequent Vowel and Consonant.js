@@ -3,22 +3,18 @@
  * @return {number}
  */
 var maxFreqSum = function(s) {
-    let vowels = 'aeiou', chars = {}
-
-    for(let i=0;i<s.length;i++){
-        let c = s[i]
-        chars[c] = chars[c] ? chars[c] + 1 : 1
-    }
-
-    let maxVows=0, maxCons=0
-    for(let k in chars){
-        if(vowels.includes(k)){
-            maxVows = chars[k] > maxVows ? chars[k] : maxVows
+    let vowels = 'aeiou', chars = []
+    let maxVows =0 , maxCons=0
+    for(let i =0 ;i < s.length;i++){
+        let charCode = s[i].charCodeAt(0) - 97
+        chars[charCode] = (chars[charCode] || 0 ) + 1
+        let charCodeCount = chars[charCode]
+        if(vowels.includes(s[i])){
+            maxVows = charCodeCount > maxVows ? charCodeCount : maxVows
         }else{
-            maxCons = chars[k] > maxCons ? chars[k] : maxCons
+            maxCons = charCodeCount > maxCons ? charCodeCount : maxCons
         }
     }
-
 
     return maxVows + maxCons
 

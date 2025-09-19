@@ -2,15 +2,7 @@
  * @param {number} rows
  */
 var Spreadsheet = function(rows) {
-    let cells = ['A', 'B', 'C', 'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     this.map = new Map()
-    for(let j=0;j<cells.length;j++ ){
-        const cell = cells[j]
-        for(let i=1;i<=rows;i++){
-            this.map.set(cell+i, 0)
-        }
-    }
-    console.log(this.map)
 };
 
 /**
@@ -28,6 +20,7 @@ Spreadsheet.prototype.setCell = function(cell, value) {
  */
 Spreadsheet.prototype.resetCell = function(cell) {
     this.map.set(cell, 0)
+
 };
 
 /**
@@ -35,19 +28,8 @@ Spreadsheet.prototype.resetCell = function(cell) {
  * @return {number}
  */
 Spreadsheet.prototype.getValue = function(formula) {
-    const tokens = formula.replace('=','+').split('+')
-    let total = 0
-    for(let i=1;i<tokens.length;i++){
-        const token = tokens[i]
-       total  +=  this.map.get(token) ?? +token
-    }
-    return total || 0
+    const [sp, token1, token2] = formula.replace('=','+').split('+')
+    const val1 = isNaN(token1) ? (this.map.get(token1) ?? 0) : +token1
+    const val2 = isNaN(token2) ? (this.map.get(token2) ?? 0) : +token2
+    return val1 + val2
 };
-
-/**
- * Your Spreadsheet object will be instantiated and called as such:
- * var obj = new Spreadsheet(rows)
- * obj.setCell(cell,value)
- * obj.resetCell(cell)
- * var param_3 = obj.getValue(formula)
- */

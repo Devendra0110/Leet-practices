@@ -1,13 +1,15 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
 var triangularSum = function(nums) {
-    if(nums.length == 1){
-        return nums[0]
-    }
-    else {
-        const newNums = []
-        for(let i=0;i<nums.length-1;i++){
-            newNums.push((nums[i]+nums[i+1])%10)
+    let current = nums;
+    while (current.length > 1) {
+        const newNums = [];
+        for (let i = 0; i < current.length - 1; i++) {
+            newNums.push((current[i] + current[i + 1]) % 10);
         }
-        const result = triangularSum(newNums)
-        return result
+        current = newNums;
     }
+    return current[0];
 };

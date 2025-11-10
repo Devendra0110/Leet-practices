@@ -2,39 +2,34 @@
  * @param {number[]} arr
  * @return {boolean}
  */
- 
 var canThreePartsEqualSum = function(arr) {
-     let arrSum = arr.reduce((acc, val) => acc + val)
-    if(arrSum%3!=0) return false
-    let partitionValue = arrSum/3
-    let sum =0,paritions=1
-   for(let j =0;j<arr.length;j++){
-            sum+=arr[j]
-            if(sum==partitionValue){
-                paritions++
-                if(paritions==4) break
-                sum =0
-                continue;
-            }
-            if(sum>partitionValue && j==arr.length-1){
-                return false
-            }
+    let sum = 0
+    for(let i=0;i<arr.length;i++){
+        sum += arr[i]
     }
-return paritions==4
+    if(sum%3 !=0) return false
 
+    let target = sum/3, count = 0, sumP = 0
+    for(let i=0;i<arr.length;i++){
+        sumP += arr[i]
+        if(sumP == target){
+            if (count == 3) return true
+            count++
+            sumP = 0
+        }
+    }
+    return false
 };
 
 /**
-basic rule to equalize in three parts it should be divisble to 3
-if not return false
-else 
-    get the 1/3
-    run loop 3 times to create 3 parts if possible
-        run loop until it became equal to the partion value
-        3 possible cases
-           loop 1 > 1/3
-           loop 2 > 1/3
-           loop 3 > 1/3
-critical cases
-    [12,-4,16,-5,9,-3,3,8,0], [1,-1,1,-1] , [0,0,0,0]
+ * line 15 it tells that we have encounter the a point where summation gets equal to 1/3 of total sum of array
+ * now reset the sum  and increase the counter
+ *
+ * if the counter reaches 3 means we've encountered the 3 parts whose equal sum is 1/ of array total sum
+ *
+ * Now I minor optimization
+            if (count =2) return true
+            count++
+            sumP = 0
+ * we can check the counter on 2 because we know after the it's gonna increment to 3 so we check condition before that and return true
  */
